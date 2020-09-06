@@ -5,7 +5,7 @@ import world from '../helpers/world.json';
 
 function WorldMap() {
     return (
-        <div>
+        <div style={{ padding: '2rem' }}>
             <VectorMap {...world} />
         </div>
     );
