@@ -2,6 +2,13 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { blue, red, green, orange } from '@material-ui/core/colors';
 import {
+    GroupRounded,
+    EmojiPeople,
+    HotelRounded,
+    SentimentVerySatisfied,
+    SentimentVerySatisfiedOutlined,
+} from '@material-ui/icons';
+import {
     Container,
     Grid,
     Paper,
@@ -9,6 +16,7 @@ import {
     CardContent,
     Typography,
 } from '@material-ui/core';
+import classNames from 'classnames';
 
 import TopBar from './components/TopBar';
 import WorldMap from './components/WorldMap';
@@ -21,6 +29,54 @@ const userStyles = makeStyles((theme) => ({
     },
     header: {
         color: theme.palette.primary.dark,
+    },
+    card: {
+        display: 'flex',
+        '& svg': {
+            margin: theme.spacing(1, 1, 0, 1),
+            padding: theme.spacing(2),
+            borderRadius: '50%',
+        },
+    },
+    confirmed: {
+        backgroundColor: orange[900],
+        '& span,h4': {
+            color: orange[100],
+        },
+        '& svg': {
+            color: orange[900],
+            backgroundColor: orange[100],
+        },
+    },
+    active: {
+        backgroundColor: blue[900],
+        '& span,h4': {
+            color: blue[100],
+        },
+        '& svg': {
+            color: blue[900],
+            backgroundColor: blue[100],
+        },
+    },
+    recovered: {
+        backgroundColor: green[900],
+        '& span,h4': {
+            color: green[100],
+        },
+        '& svg': {
+            color: green[900],
+            backgroundColor: green[100],
+        },
+    },
+    deaths: {
+        backgroundColor: red[900],
+        '& span,h4': {
+            color: red[100],
+        },
+        '& svg': {
+            color: red[900],
+            backgroundColor: red[100],
+        },
     },
 }));
 
@@ -53,19 +109,19 @@ function App() {
                             <Grid item xs={12} className={styles.item}>
                                 <Card
                                     elevation={0}
-                                    style={{ backgroundColor: orange[900] }}
+                                    className={classNames(
+                                        styles.card,
+                                        styles.confirmed
+                                    )}
                                 >
                                     <CardContent>
-                                        <Typography
-                                            variant="overline"
-                                            style={{ color: orange[100] }}
-                                        >
+                                        <GroupRounded fontSize="large" />
+                                    </CardContent>
+                                    <CardContent>
+                                        <Typography variant="overline">
                                             Confirmed
                                         </Typography>
-                                        <Typography
-                                            variant="h4"
-                                            style={{ color: orange[100] }}
-                                        >
+                                        <Typography variant="h4">
                                             5855
                                         </Typography>
                                     </CardContent>
@@ -74,19 +130,19 @@ function App() {
                             <Grid item xs={12} className={styles.item}>
                                 <Card
                                     elevation={0}
-                                    style={{ backgroundColor: blue[900] }}
+                                    className={classNames(
+                                        styles.card,
+                                        styles.active
+                                    )}
                                 >
                                     <CardContent>
-                                        <Typography
-                                            variant="overline"
-                                            style={{ color: blue[100] }}
-                                        >
+                                        <EmojiPeople fontSize="large" />
+                                    </CardContent>
+                                    <CardContent>
+                                        <Typography variant="overline">
                                             Active
                                         </Typography>
-                                        <Typography
-                                            variant="h4"
-                                            style={{ color: blue[100] }}
-                                        >
+                                        <Typography variant="h4">
                                             5855
                                         </Typography>
                                     </CardContent>
@@ -96,19 +152,19 @@ function App() {
                             <Grid item xs={12} className={styles.item}>
                                 <Card
                                     elevation={0}
-                                    style={{ backgroundColor: green[900] }}
+                                    className={classNames(
+                                        styles.card,
+                                        styles.recovered
+                                    )}
                                 >
                                     <CardContent>
-                                        <Typography
-                                            variant="overline"
-                                            style={{ color: green[100] }}
-                                        >
+                                        <SentimentVerySatisfiedOutlined fontSize="large" />
+                                    </CardContent>
+                                    <CardContent>
+                                        <Typography variant="overline">
                                             Recovered
                                         </Typography>
-                                        <Typography
-                                            variant="h4"
-                                            style={{ color: green[100] }}
-                                        >
+                                        <Typography variant="h4">
                                             5855
                                         </Typography>
                                     </CardContent>
@@ -117,19 +173,19 @@ function App() {
                             <Grid item xs={12}>
                                 <Card
                                     elevation={0}
-                                    style={{ backgroundColor: red[900] }}
+                                    className={classNames(
+                                        styles.card,
+                                        styles.deaths
+                                    )}
                                 >
                                     <CardContent>
-                                        <Typography
-                                            variant="overline"
-                                            style={{ color: red[100] }}
-                                        >
+                                        <HotelRounded fontSize="large" />
+                                    </CardContent>
+                                    <CardContent>
+                                        <Typography variant="overline">
                                             Deaths
                                         </Typography>
-                                        <Typography
-                                            variant="h4"
-                                            style={{ color: red[100] }}
-                                        >
+                                        <Typography variant="h4">
                                             5855
                                         </Typography>
                                     </CardContent>
