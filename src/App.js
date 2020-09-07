@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { blue, red, green, orange } from '@material-ui/core/colors';
 import {
     GroupRounded,
     EmojiPeople,
     HotelRounded,
-    SentimentVerySatisfied,
     SentimentVerySatisfiedOutlined,
 } from '@material-ui/icons';
 import {
@@ -17,9 +16,11 @@ import {
     Typography,
 } from '@material-ui/core';
 import classNames from 'classnames';
+import CountUp from 'react-countup';
 
 import TopBar from './components/TopBar';
 import WorldMap from './components/WorldMap';
+import { getCasesByCountry } from './helpers/api';
 
 import './App.css';
 
@@ -29,6 +30,7 @@ const userStyles = makeStyles((theme) => ({
     },
     header: {
         color: theme.palette.primary.dark,
+        // textTransform: 'capitalize',
     },
     card: {
         display: 'flex',
@@ -37,6 +39,9 @@ const userStyles = makeStyles((theme) => ({
             padding: theme.spacing(2),
             borderRadius: '50%',
         },
+    },
+    cardcontent: {
+        paddingLeft: '0',
     },
     confirmed: {
         backgroundColor: orange[900],
@@ -82,6 +87,24 @@ const userStyles = makeStyles((theme) => ({
 
 function App() {
     const styles = userStyles();
+    const [country, setCountry] = useState('World');
+    const [confirmed, setConfirmed] = useState(0);
+    const [active, setActive] = useState(0);
+    const [recovered, setRecovered] = useState(0);
+    const [deaths, setDeaths] = useState(0);
+
+    const countryHandler = ({ target }) =>
+        setCountry(target.attributes.name.value);
+
+    useEffect(() => {
+        getCasesByCountry(country).then((response) => {
+            const { data } = response;
+            setConfirmed(data.cases ? data.cases : 0);
+            setActive(data.active ? data.active : 0);
+            setRecovered(data.recovered ? data.recovered : 0);
+            setDeaths(data.deaths ? data.deaths : 0);
+        });
+    }, [country]);
 
     return (
         <div className="App">
@@ -92,7 +115,7 @@ function App() {
                     <Grid item xs={9}>
                         <Grid container justify="center">
                             <Grid item component={Paper} xs={12} elevation={0}>
-                                <WorldMap />
+                                <WorldMap clickHandler={countryHandler} />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -103,9 +126,10 @@ function App() {
                                     variant="h4"
                                     className={styles.header}
                                 >
-                                    World Cases
+                                    {country}
                                 </Typography>
                             </Grid>
+
                             <Grid item xs={12} className={styles.item}>
                                 <Card
                                     elevation={0}
@@ -117,12 +141,18 @@ function App() {
                                     <CardContent>
                                         <GroupRounded fontSize="large" />
                                     </CardContent>
-                                    <CardContent>
+                                    <CardContent className={styles.cardcontent}>
                                         <Typography variant="overline">
                                             Confirmed
                                         </Typography>
                                         <Typography variant="h4">
-                                            5855
+                                            <CountUp
+                                                start={0}
+                                                delay={0}
+                                                duration={1}
+                                                separator=","
+                                                end={confirmed}
+                                            />
                                         </Typography>
                                     </CardContent>
                                 </Card>
@@ -138,17 +168,22 @@ function App() {
                                     <CardContent>
                                         <EmojiPeople fontSize="large" />
                                     </CardContent>
-                                    <CardContent>
+                                    <CardContent className={styles.cardcontent}>
                                         <Typography variant="overline">
                                             Active
                                         </Typography>
                                         <Typography variant="h4">
-                                            5855
+                                            <CountUp
+                                                start={0}
+                                                delay={0}
+                                                duration={1}
+                                                separator=","
+                                                end={active}
+                                            />
                                         </Typography>
                                     </CardContent>
                                 </Card>
                             </Grid>
-
                             <Grid item xs={12} className={styles.item}>
                                 <Card
                                     elevation={0}
@@ -160,12 +195,18 @@ function App() {
                                     <CardContent>
                                         <SentimentVerySatisfiedOutlined fontSize="large" />
                                     </CardContent>
-                                    <CardContent>
+                                    <CardContent className={styles.cardcontent}>
                                         <Typography variant="overline">
                                             Recovered
                                         </Typography>
                                         <Typography variant="h4">
-                                            5855
+                                            <CountUp
+                                                start={0}
+                                                delay={0}
+                                                duration={1}
+                                                separator=","
+                                                end={recovered}
+                                            />
                                         </Typography>
                                     </CardContent>
                                 </Card>
@@ -181,12 +222,18 @@ function App() {
                                     <CardContent>
                                         <HotelRounded fontSize="large" />
                                     </CardContent>
-                                    <CardContent>
+                                    <CardContent className={styles.cardcontent}>
                                         <Typography variant="overline">
                                             Deaths
                                         </Typography>
                                         <Typography variant="h4">
-                                            5855
+                                            <CountUp
+                                                start={0}
+                                                delay={0}
+                                                duration={1}
+                                                separator=","
+                                                end={deaths}
+                                            />
                                         </Typography>
                                     </CardContent>
                                 </Card>

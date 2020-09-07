@@ -29,12 +29,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function WorldMap() {
+function WorldMap({ clickHandler }) {
     const styles = useStyles();
+
+    const layerProps = {
+        onClick: clickHandler,
+    };
 
     return (
         <div className={styles.root}>
-            <VectorMap {...world} />
+            <VectorMap {...world} layerProps={layerProps} />
         </div>
     );
 }
