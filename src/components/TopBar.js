@@ -2,11 +2,20 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Typography, Toolbar } from '@material-ui/core';
 
-const useStyles = makeStyles({
+import Logo from './Logo';
+
+const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: '1rem',
     },
-});
+
+    logo: {
+        margin: theme.spacing(0, 2, 0, 2),
+    },
+    header: {
+        color: '#26b899',
+    },
+}));
 
 function TopBar() {
     const styles = useStyles();
@@ -19,7 +28,10 @@ function TopBar() {
                 style={{ backgroundColor: '#fff', color: '#000' }}
             >
                 <Toolbar>
-                    <Typography variant="h6">Covid Tracker</Typography>
+                    <Logo size={48} className={styles.logo} />
+                    <Typography variant="h5" className={styles.header}>
+                        Covid-19 Tracker
+                    </Typography>
                 </Toolbar>
             </AppBar>
         </div>
