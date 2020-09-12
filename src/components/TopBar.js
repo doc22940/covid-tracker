@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Typography, Toolbar } from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
+import { Link as RouterLink } from 'react-router-dom';
 
 import Logo from './Logo';
 
@@ -13,6 +14,10 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(0, 2, 0, 2),
     },
     header: {
+        color: '#26b899',
+        flexGrow: 1,
+    },
+    link: {
         color: '#26b899',
     },
 }));
@@ -32,6 +37,20 @@ function TopBar() {
                     <Typography variant="h5" className={styles.header}>
                         Covid-19 Tracker
                     </Typography>
+                    <Button
+                        className={styles.link}
+                        component={RouterLink}
+                        to="/"
+                    >
+                        Home
+                    </Button>
+                    <Button
+                        className={styles.link}
+                        component={RouterLink}
+                        to="/stats"
+                    >
+                        Statistics
+                    </Button>
                 </Toolbar>
             </AppBar>
         </div>
