@@ -17,7 +17,7 @@ function CaseList(props) {
     const styles = useStyles();
     const { name, cases } = props;
 
-    console.log(props);
+    // console.log(props);
     return (
         <Grid container>
             <Grid item className={styles.item}>

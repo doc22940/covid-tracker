@@ -1,22 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { blue, red, green, orange } from '@material-ui/core/colors';
-import {
-    GroupRounded,
-    EmojiPeople,
-    HotelRounded,
-    SentimentVerySatisfiedOutlined,
-} from '@material-ui/icons';
-import {
-    Container,
-    Grid,
-    Paper,
-    Card,
-    CardContent,
-    Typography,
-} from '@material-ui/core';
-import classNames from 'classnames';
-import CountUp from 'react-countup';
+
+import { Container, Grid, Paper } from '@material-ui/core';
 
 import TopBar from './components/TopBar';
 import WorldMap from './components/WorldMap';
@@ -55,14 +40,14 @@ function App() {
 
             <Container>
                 <Grid container spacing={2} style={{ marginTop: '1.5rem' }}>
-                    <Grid item xs={9}>
+                    <Grid item xs={12} md={9}>
                         <Grid container justify="center">
                             <Grid item component={Paper} xs={12} elevation={0}>
                                 <WorldMap clickHandler={countryHandler} />
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={3}>
+                    <Grid item xs={12} md={3}>
                         <CaseList
                             name={country}
                             cases={createCaseDict({

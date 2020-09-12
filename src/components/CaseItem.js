@@ -19,10 +19,23 @@ const useStyles = makeStyles((theme) => ({
             borderRadius: '50%',
             fontSize: '2.15rem',
             width: '1em !important',
+            [theme.breakpoints.only('md')]: {
+                fontSize: '1.5rem',
+            },
         },
     },
-    cardcontent: {
+    cardContent: {
+        [theme.breakpoints.only('md')]: {
+            padding: theme.spacing(1),
+        },
+    },
+    number: {
         paddingLeft: '0',
+        '& h4': {
+            [theme.breakpoints.only('md')]: {
+                fontSize: '1.5rem',
+            },
+        },
     },
     confirmed: {
         backgroundColor: orange[900],
@@ -70,17 +83,18 @@ function CaseItem({ data }) {
     const styles = useStyles();
     const { title, icon, value } = data;
 
-    console.log(data);
     return (
         <Grid item xs={12} className={styles.item}>
             <Card
                 elevation={0}
                 className={classNames(styles.card, styles[title])}
             >
-                <CardContent>
+                <CardContent className={styles.cardContent}>
                     <FontAwesomeIcon icon={icon} />
                 </CardContent>
-                <CardContent className={styles.cardcontent}>
+                <CardContent
+                    className={classNames(styles.cardContent, styles.number)}
+                >
                     <Typography variant="overline">{title}</Typography>
                     <Typography variant="h4">
                         <CountUp

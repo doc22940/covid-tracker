@@ -6,11 +6,12 @@ import world from '../helpers/world.json';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        padding: theme.spacing(5),
+        padding: theme.spacing(2),
+        margin: '0 auto',
+
         '& > svg': {
             stroke: '#fff',
             '& > path': {
-                // fill: '#a82b2b',
                 fill: '#EE2677',
                 cursor: 'pointer',
                 outline: 'none',
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
                     fill: '#E86252',
                 },
             },
+        },
+        [theme.breakpoints.only('lg')]: {
+            width: '712px',
+            padding: theme.spacing(5),
         },
     },
 }));
