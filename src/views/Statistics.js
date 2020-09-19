@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Grid } from '@material-ui/core';
+import { Container, Grid, Paper } from '@material-ui/core';
 import MonthlyChart from '../components/MonthlyChart';
 
 import CountrySelect from '../components/CountrySelect';
@@ -34,25 +34,35 @@ function Statistics() {
                 direction="row"
                 justify="flex-end"
                 alignItems="center"
-            >
-                <Grid item xs={4}>
-                    <CountrySelect
-                        countries={countries}
-                        changeHandler={(e, value) => {
-                            setSelectedCountry(value ? value.name : 'Global');
-                            setSelectedCountryCode(value ? value.iso2 : '');
-                        }}
-                    />
-                </Grid>
-            </Grid>
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="center"
+                component={Paper}
+                elevation={0}
             >
                 <Grid item xs={12}>
-                    <MonthlyChart data={timeline} country={selectedCountry} />
+                    <Grid container direction="column" justify="center">
+                        <Grid item xs={12} style={{ margin: '1rem' }}>
+                            <Grid container justify="flex-end">
+                                <Grid item>
+                                    <CountrySelect
+                                        countries={countries}
+                                        changeHandler={(e, value) => {
+                                            setSelectedCountry(
+                                                value ? value.name : 'Global'
+                                            );
+                                            setSelectedCountryCode(
+                                                value ? value.iso2 : ''
+                                            );
+                                        }}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <MonthlyChart
+                                data={timeline}
+                                country={selectedCountry}
+                            />
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
         </Container>
