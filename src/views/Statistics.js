@@ -11,7 +11,7 @@ import {
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
-import MonthlyChart from '../components/MonthlyChart';
+import MonthlyChartByCountry from '../components/MonthlyChartByCountry';
 import CountrySelect from '../components/CountrySelect';
 import { getTimelineByCountry, getCountryList } from '../helpers/api';
 import MonthlyComparisonChart from '../components/MonthlyComparisonChart';
@@ -25,10 +25,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Statistics() {
-    const [timeline, setTimeline] = useState(null);
     const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState('Global');
-    const [selectedCountryCode, setSelectedCountryCode] = useState('');
+
     const [compareCountryOne, setCompareCountryOne] = useState('');
     const [compareCountryTwo, setCompareCountryTwo] = useState('');
     const [compareCountryCodeOne, setCompareCountryCodeOne] = useState('');
@@ -51,13 +49,6 @@ function Statistics() {
             );
         });
     }, []);
-
-    useEffect(() => {
-        getTimelineByCountry(selectedCountryCode).then((response) => {
-            const { data } = response;
-            setTimeline(data.data.timeline || data.data);
-        });
-    }, [selectedCountryCode]);
 
     useEffect(() => {
         if (!compareCountryCodeOne) {
@@ -91,42 +82,7 @@ function Statistics() {
 
     return (
         <Container>
-            <Grid
-                container
-                direction="row"
-                justify="flex-end"
-                alignItems="center"
-                component={Paper}
-                elevation={0}
-            >
-                <Grid item xs={12}>
-                    <Grid container direction="column" justify="center">
-                        <Grid item xs={12} style={{ margin: '1rem' }}>
-                            <Grid container justify="flex-end">
-                                <Grid item>
-                                    <CountrySelect
-                                        countries={countries}
-                                        changeHandler={(e, value) => {
-                                            setSelectedCountry(
-                                                value ? value.name : 'Global'
-                                            );
-                                            setSelectedCountryCode(
-                                                value ? value.iso2 : ''
-                                            );
-                                        }}
-                                    />
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <MonthlyChart
-                                data={timeline}
-                                country={selectedCountry}
-                            />
-                        </Grid>
-                    </Grid>
-                </Grid>
-            </Grid>
+            <MonthlyChartByCountry countries={countries} />
             <Grid
                 container
                 direction="row"
