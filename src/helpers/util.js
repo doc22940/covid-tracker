@@ -108,3 +108,58 @@ export const createColumnChartOptions = (timeline, country) => {
     console.log(options);
     return options;
 };
+
+export const createChartOption = (optionsData) => {
+    const months = 'Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sept,Oct,Nov,Dec'.split(
+        ','
+    );
+
+    let series = optionsData.data.map((item) => {
+        if (!item.timeline) {
+            return null;
+        }
+
+        const cases = getMonthWiseCases(item.timeline);
+
+        const series = {
+            name: item.country,
+            // color: item.color,
+            colorByPoint: false,
+            data: [],
+        };
+
+        for (let key in cases) {
+            series.data.push({
+                name: months[key],
+                y: cases[key][optionsData.caseType],
+            });
+        }
+
+        return series;
+    });
+
+    series = series.filter((item) => !!item);
+
+    const options = {
+        chart: {
+            type: optionsData.type,
+        },
+        subtitle: {
+            text: 'Monthly Covid-19 Cases',
+        },
+        title: {
+            text: 'Covid-19 Cases comparison',
+        },
+        xAxis: {
+            type: 'category',
+        },
+        yAxis: {
+            title: {
+                text: 'Corona Cases',
+            },
+        },
+        series,
+    };
+
+    return options;
+};
