@@ -2,7 +2,7 @@
     "name": "covid-tracker",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://github.com/yogiindia/covid-tracker",
+    "homepage": "https://yogiindia.github.io/covid-tracker",
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.14.0",
         "@fortawesome/fontawesome-svg-core": "^1.2.30",
