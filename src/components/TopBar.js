@@ -1,7 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Button, Link } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Logo from './Logo';
 
@@ -50,6 +51,12 @@ function TopBar() {
                         to="/stats"
                     >
                         Statistics
+                    </Button>
+                    <Button href="#" className={styles.link}>
+                        <FontAwesomeIcon
+                            icon={['fab', 'github-alt']}
+                            size="lg"
+                        />
                     </Button>
                 </Toolbar>
             </AppBar>
