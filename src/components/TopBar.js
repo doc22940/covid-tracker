@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Typography, Toolbar, Button, Link } from '@material-ui/core';
+import { AppBar, Typography, Toolbar, Button } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
