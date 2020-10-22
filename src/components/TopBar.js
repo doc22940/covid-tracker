@@ -9,6 +9,7 @@ import Logo from './Logo';
 const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: '1rem',
+        flexGrow: 1,
     },
 
     logo: {
@@ -17,9 +18,17 @@ const useStyles = makeStyles((theme) => ({
     header: {
         color: '#26b899',
         flexGrow: 1,
+        display: 'flex',
+        alignItems: 'center',
     },
     link: {
         color: '#26b899',
+    },
+    title: {
+        fontSize: '1.5rem',
+        [theme.breakpoints.only('xs')]: {
+            display: 'none',
+        },
     },
 }));
 
@@ -34,10 +43,14 @@ function TopBar() {
                 style={{ backgroundColor: '#fff', color: '#000' }}
             >
                 <Toolbar>
-                    <Logo size={48} className={styles.logo} />
-                    <Typography variant="h5" className={styles.header}>
-                        Covid-19 Tracker
-                    </Typography>
+                    <div className={styles.header}>
+                        <RouterLink to="/">
+                            <Logo size={48} className={styles.logo} />
+                        </RouterLink>
+                        <Typography variant="span" className={styles.title}>
+                            Covid-19 Tracker
+                        </Typography>
+                    </div>
                     <Button
                         className={styles.link}
                         component={RouterLink}
