@@ -66,7 +66,7 @@ function TopBar() {
                         Statistics
                     </Button>
                     <Button
-                        href="https://github.com/yogiindia/covid-tracker"
+                        href="https://github.com/doc22940/covid-tracker"
                         className={styles.link}
                     >
                         <FontAwesomeIcon
